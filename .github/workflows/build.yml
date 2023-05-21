@@ -14,8 +14,8 @@ on:
       - 'NOTICE'
       - '.gitignore'
       - '.dockerignore'
-    branches-ignore:
-      - daily
+    # branches-ignore:
+    #   - daily
     tags:
       - '*'
 
