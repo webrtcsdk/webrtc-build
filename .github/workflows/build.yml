@@ -62,8 +62,8 @@ jobs:
       fail-fast: false
       matrix:
         name:
-          - macos_arm64
-          - macos_x86_64
+          # - macos_arm64
+          # - macos_x86_64
           - ios
     runs-on: macos-11
     steps:
@@ -145,8 +145,8 @@ jobs:
       fail-fast: false
       matrix:
         name:
-          - macos_arm64
-          - macos_x86_64
+          # - macos_arm64
+          # - macos_x86_64
           - ios
           # - raspberry-pi-os_armv6
           # - raspberry-pi-os_armv7
