@@ -483,7 +483,7 @@ def build_webrtc_ios(
     # - https://webrtc-review.googlesource.com/c/src/+/232600 may be related. use_lld=false is added.
 
     gn_args_base = [
-        'rtc_libvpx_build_vp9=false',
+        'rtc_libvpx_build_vp9=true',
         'enable_dsyms=false',
         'use_custom_libcxx=false',
         'treat_warnings_as_errors=false',
