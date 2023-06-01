@@ -4,8 +4,8 @@ env:
 
 downloads:
   webrtc_src:
-    repo: https://github.com/webrtc-waterbus-io/webrtc.git
-    branch: branch-m114
+    repo: https://github.com/webrtc-alive/webrtc.git
+    branch: branch-m115
     path: src
 
   depot_tools:
