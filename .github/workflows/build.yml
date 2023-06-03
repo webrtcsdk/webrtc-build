@@ -94,7 +94,7 @@ jobs:
           # - ubuntu-20.04_x86_64
           # - ubuntu-22.04_x86_64
           - android
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
     - uses: actions/checkout@v2
     - name: Disk Cleanup
