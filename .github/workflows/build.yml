@@ -104,7 +104,7 @@ jobs:
         docker image prune -a -f
         # 3.9GB
         sudo rm -rf /usr/local/share/boost
-        # 25GB
+        # 27GB
         sudo rm -rf /usr/share/dotnet
         df -h
     - run: ./build.${{ matrix.name }}.sh "${{ github.event.inputs.commitHash }}"
