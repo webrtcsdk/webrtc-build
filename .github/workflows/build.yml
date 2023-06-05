@@ -156,7 +156,7 @@ jobs:
           # - ubuntu-18.04_x86_64
           # - ubuntu-20.04_x86_64
           # - ubuntu-22.04_x86_64
-          - android
+          # - android
     name: Release ${{ matrix.name }}
     if: contains(github.ref, 'tags/m')
     needs:
