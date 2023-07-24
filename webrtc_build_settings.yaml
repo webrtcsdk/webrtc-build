@@ -4,8 +4,8 @@ env:
 
 downloads:
   webrtc_src:
-    repo: https://github.com/webrtc-alive/webrtc.git
-    branch: branch-m116-hevc
+    repo: https://github.com/webrtcsdk/webrtc.git
+    branch: m114-rnnoise
     path: src
 
   depot_tools:
