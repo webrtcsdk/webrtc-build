@@ -288,10 +288,10 @@ def get_webrtc(source_dir, patch_dir, version, target,
             cmd(['git', 'clean', '-df'])
             cmd(['gclient', 'sync', '-D', '--force',
                 '--reset', '--with_branch_heads'])
-            for patch in PATCHES[target]:
-                depth, dirs = PATCH_INFO.get(patch, (1, ['.']))
-                dir = os.path.join(src_dir, *dirs)
-                apply_patch(os.path.join(patch_dir, patch), dir, depth)
+            # for patch in PATCHES[target]:
+            #     depth, dirs = PATCH_INFO.get(patch, (1, ['.']))
+            #     dir = os.path.join(src_dir, *dirs)
+            #     apply_patch(os.path.join(patch_dir, patch), dir, depth)
 
 
 def git_get_url_and_revision(dir):
