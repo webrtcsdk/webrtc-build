@@ -245,12 +245,13 @@ def apply_patch(patch, dir, depth):
     with cd(dir):
         logging.info(f'patch -p{depth} < {patch}')
         if platform.system() == 'Windows':
-            cmd(['git', 'apply', f'-p{depth}',
-                '--ignore-space-change', '--ignore-whitespace', '--whitespace=nowarn',
-                 patch])
+            cmd = ['git', 'apply', f'-p{depth}',
+                   '--ignore-space-change', '--ignore-whitespace', '--whitespace=nowarn',
+                   patch]
+            subprocess.run(cmd, shell=True, capture_output=True, text=True)
         else:
-            with open(patch) as stdin:
-                cmd(['patch', f'-p{depth}'], stdin=stdin)
+            cmd = ['patch', f'-p{depth}']
+            subprocess.run(cmd, stdin=subprocess.PIPE, text=True)
 
 
 def get_webrtc(source_dir, patch_dir, version, target,
@@ -266,7 +267,7 @@ def get_webrtc(source_dir, patch_dir, version, target,
         with cd(webrtc_source_dir):
             cmd(['gclient'])
             shutil.copyfile(os.path.join(BASE_DIR, '.gclient'), '.gclient')
-            cmd(['git', 'clone', 'https://github.com/webrtc-sdk/webrtc.git', 'src'])
+            cmd(['git', 'clone', 'https://github.com/webrtcsdk/webrtc.git', 'src'])
             if target == 'android':
                 with open('.gclient', 'a') as f:
                     f.write("target_os = [ 'android' ]\n")
@@ -284,7 +285,7 @@ def get_webrtc(source_dir, patch_dir, version, target,
                 cmd(['git', 'remote', 'set-head', 'origin', '-a'])
                 cmd(['git', 'checkout', '-f', 'origin/HEAD'])
             else:
-                cmd(['git', 'checkout', '-b', version])
+                cmd(['git', 'checkout', version])
             cmd(['git', 'clean', '-df'])
             cmd(['gclient', 'sync', '-D', '--force',
                 '--reset', '--with_branch_heads'])
