@@ -866,10 +866,10 @@ def package_webrtc(source_dir, build_dir, package_dir, target,
     ts = []
     for t in get_build_targets(target):
         ts += ['--target', t]
-    cmd(['python3', os.path.join(webrtc_src_dir, 'tools_webrtc', 'libs', 'generate_licenses.py'),
-        *ts, webrtc_package_dir, *dirs])
-    os.rename(os.path.join(webrtc_package_dir, 'LICENSE.md'),
-              os.path.join(webrtc_package_dir, 'NOTICE'))
+    # cmd(['python3', os.path.join(webrtc_src_dir, 'tools_webrtc', 'libs', 'generate_licenses.py'),
+    #     *ts, webrtc_package_dir, *dirs])
+    # os.rename(os.path.join(webrtc_package_dir, 'LICENSE.md'),
+    #           os.path.join(webrtc_package_dir, 'NOTICE'))
 
     # ヘッダーファイルをコピー
     # Copy headers
