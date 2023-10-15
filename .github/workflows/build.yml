@@ -114,19 +114,7 @@ jobs:
           # 13G
           sudo rm -rf /usr/local/lib/android
           df -h
-      - name: Setup ${{ matrix.name }} for x86_64
-        if: endsWith(matrix.name, '_x86_64')
-        run: sudo scripts/apt_install_x86_64.sh
-      - name: Setup ${{ matrix.name }} for arm
-        if: contains(matrix.name, '_armv')
-        run: sudo scripts/apt_install_arm.sh
-      - name: Setup ${{ matrix.name }} for android
-        if: matrix.name == 'android'
-        run: sudo scripts/apt_install_x86_64.sh && sudo apt-get install -y openjdk-11-jdk
-      - name: Build ${{ matrix.name }}
-        run: |
-          python3 run.py build ${{ matrix.name }}
-          python3 run.py package ${{ matrix.name }}
+      - run: ./build.${{ matrix.name }}.sh "${{ github.event.inputs.commitHash }}"
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
