@@ -21,6 +21,9 @@ on:
 
 jobs:
   build-macos:
+    defaults:
+      run:
+        working-directory: ./build
     strategy:
       fail-fast: false
       matrix:
@@ -40,6 +43,9 @@ jobs:
         name: webrtc.${{ matrix.name }}.tar.gz
         path: build/_package/${{ matrix.name }}/webrtc.tar.gz
   build-linux:
+    defaults:
+      run:
+        working-directory: ./build
     strategy:
       fail-fast: false
       matrix:
