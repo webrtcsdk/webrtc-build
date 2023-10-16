@@ -13,11 +13,10 @@ IMAGE_NAME=webrtc/$PACKAGE_NAME:m${WEBRTC_VERSION}
 DOCKER_BUILDKIT=1 docker build \
   -t $IMAGE_NAME \
   -f $PACKAGE_NAME/Dockerfile \
-  --build-arg COMMIT_HASH="$WEBRTC_COMMIT" \
+  --build-arg COMMIT_HASH="$1" \
   .
 
 mkdir -p $PACKAGE_DIR
-CONTAINER_ID=`docker container create -i -t --name webrtc-container $IMAGE_NAME`
-docker container cp $CONTAINER_ID:/webrtc.tar.gz ../
+CONTAINER_ID=`docker container create $IMAGE_NAME`
+docker container cp $CONTAINER_ID:/webrtc.tar.gz $PACKAGE_DIR/webrtc.tar.gz
 docker container rm $CONTAINER_ID
-docker rmi -f $IMAGE_NAME
