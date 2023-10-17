@@ -38,7 +38,7 @@ jobs:
     - run: brew install ninja
     - run: ./build.${{ matrix.name }}.sh "${{ github.event.inputs.commitHash }}"
     - name: Upload Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v1
       with:
         name: webrtc.${{ matrix.name }}.tar.gz
         path: build/_package/${{ matrix.name }}/webrtc.tar.gz
@@ -74,7 +74,7 @@ jobs:
           df -h
       - run: ./build.${{ matrix.name }}.sh "${{ github.event.inputs.commitHash }}"
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v1
         with:
           name: webrtc.${{ matrix.name }}.tar.gz
           path: build/_package/${{ matrix.name }}/webrtc.tar.gz
@@ -84,23 +84,60 @@ jobs:
     needs:
       - build-macos
       - build-linux
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/download
-        with:
-          platform: ios
-      - uses: ./.github/actions/download
-        with:
-          platform: android
-      - name: Env to output
-        run: |
-          echo "package_paths<<EOF" >> $GITHUB_OUTPUT
-          cat package_paths.env >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-        id: env
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files:
-            ${{ steps.env.outputs.package_paths }}
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1.0.0
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: ${{ github.ref }}
+        draft: false
+        prerelease: false
+    - name: Output upload url
+      shell: bash
+      run: echo "UPLOAD_URL='${{ steps.create_release.outputs.upload_url }}'" > create-release.env
+    - name: Upload create-release Environment
+      uses: actions/upload-artifact@v1
+      with:
+        name: create-release.env
+        path: create-release.env
+  upload-assets:
+    strategy:
+      fail-fast: false
+      matrix:
+        name:
+          - ios
+          - android
+    name: Release ${{ matrix.name }}
+    if: contains(github.ref, 'tags/m')
+    needs:
+      - create-release
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Download ${{ matrix.name }}
+      uses: actions/download-artifact@v1
+      with:
+        name: webrtc.${{ matrix.name }}.tar.gz
+    - uses: actions/download-artifact@v1
+      with:
+        name: create-release.env
+    - name: Env to output
+      shell: bash
+      run: |
+        source create-release.env/create-release.env
+        echo "::set-output name=upload_url::$UPLOAD_URL"
+      id: env
+    - name: Upload ${{ matrix.name }} Release Asset
+      uses: actions/upload-release-asset@v1.0.1
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      with:
+        upload_url: ${{ steps.env.outputs.upload_url }}
+        asset_path: webrtc.${{ matrix.name }}.tar.gz/webrtc.tar.gz
+        asset_name: webrtc.${{ matrix.name }}.tar.gz
+        asset_content_type: application/gzip
