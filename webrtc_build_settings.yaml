@@ -4,8 +4,8 @@ env:
 
 downloads:
   webrtc_src:
-    repo: https://github.com/webrtcsdk/webrtc.git
-    branch: m114-rnnoise
+    repo: https://github.com/webrtcsdk/webrtc-sdk-rnnoise.git
+    branch: kairtc-m119
     path: src
 
   depot_tools:
