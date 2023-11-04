@@ -385,6 +385,7 @@ def init_rootfs(sysroot: str, config: MultistrapConfig, force=False):
 
 COMMON_GN_ARGS = [
     "rtc_use_h264=false",
+    "rtc_use_h265=true",
     "is_component_build=false",
     'rtc_build_examples=false',
     "use_rtti=true",

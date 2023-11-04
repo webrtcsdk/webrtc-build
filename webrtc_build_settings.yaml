@@ -5,7 +5,7 @@ env:
 downloads:
   webrtc_src:
     repo: https://github.com/webrtcsdk/webrtc-sdk-rnnoise.git
-    branch: kairtc-m120
+    branch: kairtc-m120-hevc
     path: src
 
   depot_tools:
@@ -25,6 +25,7 @@ base_gn_args:
   rtc_enable_symbol_export: true
   rtc_build_examples: false
   rtc_use_h264: true
+  rtc_use_h265: true
   use_rtti: true
   libcxx_abi_unstable: false
   use_custom_libcxx: false
