@@ -4,8 +4,8 @@ env:
 
 downloads:
   webrtc_src:
-    repo: https://github.com/webrtcsdk/webrtc-sdk-rnnoise.git
-    branch: kairtc-m120
+    repo: https://github.com/BertholdKrevert/webrtc.git
+    branch: add_hevc_support_for_ios_android
     path: src
 
   depot_tools:
