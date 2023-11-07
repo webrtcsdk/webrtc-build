@@ -17,7 +17,7 @@ cd webrtc-sdk-checkout
 solutions = [
   { 
     "name"        : 'src',
-    "url"         : 'https://github.com/open-webrtc-toolkit/owt-deps-webrtc.git',
+    "url"         : 'https://github.com/webrtcsdk/webrtc-sdk-rnnoise.git',
     "deps_file"   : 'DEPS',
     "managed"     : False,
     "custom_deps" : {

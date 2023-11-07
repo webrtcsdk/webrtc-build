@@ -4,8 +4,8 @@ env:
 
 downloads:
   webrtc_src:
-    repo: https://github.com/open-webrtc-toolkit/owt-deps-webrtc.git
-    branch: 108-sdk
+    repo: https://github.com/webrtcsdk/webrtc-sdk-rnnoise.git
+    branch: wip/hevc/kairtc-m120
     path: src
 
   depot_tools:
