@@ -391,7 +391,6 @@ COMMON_GN_ARGS = [
     "use_rtti=true",
     'rtc_build_tools=false',
     "rtc_enable_protobuf=false",
-    "rtc_use_recorder=false",
 ]
 
 WEBRTC_BUILD_TARGETS_MACOS_COMMON = [
