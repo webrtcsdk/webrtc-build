@@ -4,7 +4,7 @@ env:
 
 downloads:
   webrtc_src:
-    repo: https://github.com/webrtcsdk/webrtc-sdk-rnnoise.git
+    repo: https://github.com/webrtcsdk/webrtcsdk.git
     branch: wip/hevc/kairtc-m120
     path: src
 
