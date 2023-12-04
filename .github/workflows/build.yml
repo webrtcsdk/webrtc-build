@@ -42,20 +42,6 @@ jobs:
       with:
         name: webrtc.${{ matrix.name }}.tar.gz
         path: build/_package/${{ matrix.name }}/webrtc.tar.gz
-    - name: Extract iOS Frameworks
-      run: |
-          tar -xzf build/_package/${{ matrix.name }}/webrtc.tar.gz -C build/_package/${{ matrix.name }}/
-          cd build/_package/${{ matrix.name }}/Frameworks
-          zip -r WebRTC.xcframework.zip WebRTC.xcframework
-    - name: Upload WebRTC.xcframework.zip
-      uses: actions/upload-release-asset@v1.0.1
-      env:
-        GITHUB_TOKEN: ${{ secrets.TOKEN }}
-      with:
-        upload_url: ${{ steps.env.outputs.upload_url }}
-        asset_path: build/_package/${{ matrix.name }}/Frameworks/WebRTC.xcframework.zip
-        asset_name: WebRTC.xcframework.zip
-        asset_content_type: application/zip
   build-linux:
     defaults:
       run:
@@ -92,15 +78,6 @@ jobs:
         with:
           name: webrtc.${{ matrix.name }}.tar.gz
           path: build/_package/${{ matrix.name }}/webrtc.tar.gz
-      - name: Upload AAR file
-        uses: actions/upload-release-asset@v1.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        with:
-          upload_url: ${{ steps.env.outputs.upload_url }}
-          asset_path: build/_package/${{ matrix.name }}/libwebrtc.aar
-          asset_name: libwebrtc.aar
-          asset_content_type: application/zip
   create-release:
     name: Create Release
     if: contains(github.ref, 'tags/m')
