@@ -5,7 +5,7 @@ env:
 downloads:
   webrtc_src:
     repo: https://github.com/webrtcsdk/webrtcsdk.git
-    branch: kairtc-m122
+    branch: kairtc-m123
     path: src
 
   depot_tools:
