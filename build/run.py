@@ -685,7 +685,7 @@ def build_webrtc(
                 'enable_dsyms=true',
                 'rtc_libvpx_build_vp9=true',
                 'rtc_enable_symbol_export=true',
-                'rtc_enable_objc_symbol_export=false',
+                'rtc_enable_objc_symbol_export=true',
                 'use_custom_libcxx=false',
                 'treat_warnings_as_errors=false',
                 'clang_use_chrome_plugins=false',
